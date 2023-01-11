@@ -1,81 +1,75 @@
 <template>
-    <div class="container mt-3">
+    <div class="containera">
+      <div class="row">
+        
+      <div class="col s12 l6 xl10">
         <div class="row">
-            <div class="col">
-                <p class="h3 text-success fw-bold">Contact Manager</p>
-                <router-link to="/contacts/add" class="btn btn-success btn -sm"><i class="fa fa-plus-circle"></i></router-link>
-            </div>
+          <contact
+           @delete-contact="deleteContact(contact)" 
+           v-for="contact in contacts" 
+           :key="contact.id" 
+           :contact="contact"
+           @edit-contact="editContact(contact)">
+          </contact>
         </div>
-   
-
-        <div v-if="errorMessage">
-            <div class="container mt-3">
-                <div class="row">
-                    <div class="col">
-                       <p class="h4 text-danger fw-bold">{{ errorMessage }}</p>
-                    </div>
-                </div>
+      </div>
+  
+      <div class="col s12 l6 xl2">
+          <div class="card-panel z-depth-1 contact adding">
+            <div class="inner teal-text text-lighten-4">
+             <i @click="addcontact(contact_item)" class="large material-icons">add_circle_outline</i>
             </div>
+          </div>
         </div>
-
-        <div class="container mt-3" v-if = "contacts.length > 0">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card my-2 list-group-item-success shadow-lg" v-for = "contact of contacts" v-bind:key = "contact">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-sm-4">
-                                    <img :src="contact.photo" :alt="contact.name" class="contact-img-big">
-
-                                </div>
-                                <div class="col-sm-7">
-                                    <ul class="list-group">  
-                                        <li class="list-group-item">ID : <span class="fw-bold">{{contact.id}}</span></li>
-                                        <li class="list-group-item">Name : <span class="fw-bold">{{contact.name}}</span></li>
-                                        <li class="list-group-item">Title : <span class="fw-bold">{{contact.title}}</span></li>
-                                        <li class="list-group-item">Company: <span class="fw-bold">{{contact.company}}</span></li>
-                                        <li class="list-group-item">Email : <span class="fw-bold">{{contact.email}}</span></li>
-                                        <li class="list-group-item">Mobile : <span class="fw-bold">{{contact.mobile}}</span></li>   
-                                        <li class="list-group-item">Address: <span class="fw-bold">{{contact.address}}</span></li>
-                                        <li class="list-group-item">City: <span class="fw-bold">{{contact.city}}</span></li>
-                                        <li class="list-group-item">Location : <span class="fw-bold">lat:{{contact.location.lat}} lng:{{contact.location.lng}}</span></li>  
-                                    </ul>
-
-                                </div>
-                                <div class="col-sm-1 d-flex flex-column justify-content-center align-items-center">
-                        
-                                    <router-link :to="`/contacts/view/${contact.id}`" class="btn btn-warning my-1">
-                                        <i class="fa fa-eye"></i>
-                                    </router-link>
-                                    <router-link :to="`/contacts/edit/${contact.id}`"  class="btn btn-primary my-1">
-                                        <i class="fa fa-pen"></i>
-                                    </router-link>
-                                    <router-link :to="`/contacts/delete/${contact.id}`"  class="btn btn-primary my-1">
-                                        <i class="fa fa-trash"></i>
-                                    </router-link>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
+      </div>
+      
+     <!-- FORM YO Yo -->
+    <div v-if="showModal">
+      <contact-form 
+      :valid = "valid"
+      :contact_item="contact_item" 
+      :buttonText="buttonText"
+      @update-contact="updateContact(contact_item)"
+      @cancel-contact="cancelContact(contact_item)"
+      @validate-contact="validateContact(contact_item)"
+      ></contact-form>
+      </div>
+     
+      <!-- use the modal component, pass in the prop -->
+      <modal v-if="showModal" @close="showModal = false">
+      </modal>
+  
     </div>
-    
+  </template>
 
-</template>
 
 <script>
 import { ContactService } from '@/services/ContactService';
+import Contact from "@/components/Contact.vue"
+import ContactForm from "@/components/ContactForm.vue"
+
 
 export default {  
     name: "ContactManager",
+    components: { Contact, ContactForm },
     data: function (){
         return{
         contacts : [],
+        valid: false,
+        showModal: false,
+        buttonText: "",
+        contact_item: {
+                    name : 'Name',
+                    img: 'https://img.freepik.com/premium-vector/man-avatar-character-male-portrait-flat-design_532867-538.jpg?w=1060',
+                    email : 'Email',
+                    phone : 'Phone',
+                    company : 'Company',
+                    skill : 'Profession',
+                    id : '',
+                    address : 'Address',
+                    city : 'City',
+                    location : {},
+                },
         errorMessage : null
     }
 },
@@ -90,12 +84,147 @@ export default {
         }
     },
     methods: {
-        
+        updateLocal() {
+            this.contacts = ContactService.getAllContacts() ;
+        },
+       editContact(contact)
+        {
+            this.buttonText = "Edit Contact" ;
+            this.contact_item = contact ;
+            this.showModal = true ;
+        },
+        cancelContact(contact) {
+            alert("cancelContact:"+contact) ;
+            this.showModal = false ;
+        },
+        updateContact : function(contact)
+        {
+            alert("updateContact:"+contact)
+        },
+        addcontact: function()
+        {
+            let d = new Date() ;
+            this.contact_item = {
+                    name : 'Name',
+                    img: 'https://img.freepik.com/premium-vector/man-avatar-character-male-portrait-flat-design_532867-538.jpg?w=1060',
+                    email : 'Email',
+                    phone : 'Phone',
+                    company : 'Company',
+                    skill : 'Profession',
+                    id : Date.now(),
+                    address : 'Address',
+                    city : 'City',
+                    location : {},
+                }
+                this.showModal = true ;
+
+                alert(this.contact_item.id) ;
+        },
+        deleteContact : function(contact)
+            {
+                try{
+                    ContactService.deleteContact(contact.id) ;
+                    this.updateLocal()
+                }
+                catch(error)
+                {
+                    console.log(error)
+                }
+            },
+        updateSubmit : async function(contact)
+            {
+                try
+                {
+                    if( await ContactService.createContact(contact) == true )
+                    {
+                        return this.$router.push('/') ;
+                    }
+                }
+                catch(error)
+                {
+                    console.log(error)
+                }
+            },
+        validateContact : function(contact){
+        const regex = /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g;
+        if (!regex.test(contact.phone)) {
+            alert("Wrong phone no");
+            return false
+        }
+        else return true
+    },
         }
     }
 
 </script>
 
-<style scoped>
-
+<style lang="scss">
+body {
+  background-color: silver;
+}
+.modal {
+  padding: 15px;
+}
+.contact {
+  position: relative;
+  height: 230px;
+  &.adding {
+    display: table;
+    width: 100%;
+    text-align: center;
+    .inner {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+  i {
+    cursor: pointer;
+  }
+  h5, h4 {
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  h4 {
+    font-size: 20px;
+  }
+  h5 {
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+  p {
+    margin: 6px 0;
+    line-height: 1;
+    &.location {
+      margin: 10px 0 15px;
+      i, span {
+        display: inline-block;
+        vertical-align: middle;
+      }
+      i {
+        margin-top: -2px;
+        font-size: 15px;
+        margin-right: 5px;
+      }
+    }
+  }
+}
+.skill {
+  display: inline-block;
+  line-height: 1;
+  font-weight: bold;
+  margin-top: 8px;
+  font-size: 16px;
+}
+.buttons-block {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  i {
+    display: inline-block;
+    font-size: 20px;
+    margin-left: 3px;
+    vertical-align: middle;
+  }
+}
 </style>
+

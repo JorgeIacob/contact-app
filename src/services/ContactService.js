@@ -1,28 +1,13 @@
 import axios from 'axios'
 export class ContactService {
     static contacts = {
-        '1519720712925':{
-          "id": "1519720712925",
-          "name": "John Smith",
-          "company": "Twitter. inc.",
-          "email":"john_smith@gmail.com",
-          "title": "Graphics designer",
-          "mobile": "(123)956-7890",
-          "photo": "https://img.freepik.com/free-photo/portrait-attractive-man-with-kiss-isolated-blue_155003-4530.jpg?w=740&t=st=1672446016~exp=1672446616~hmac=198df8cc0dde5d8b61b6d7b00b64d9345dde4c9bc3828467b8eb8c50ce8f2fad",
-          "location": {
-            "lat": 37.7855662,
-            "lng": -122.3969688
-           },
-           "address": '795 Folsom Ave, Suite 600',
-	       "city": 'San Francisco, CA 94107'
-        },
-        '1519720712926':{  "id": "1519720712926",
+       '1519720712926':{  "id": "1519720712926",
             "name": "Janeth Carton",
             "company": "Twitter. inc.",
             "email":"j_carthon@gmail.com",
-            "title": "CEO",
-            "mobile": "(123)456-7790",
-            "photo": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1200",      
+            "skill": "CEO",
+            "phone": "(123)456-7790",
+            "img": "janeth_carton.jpg",      
             "location": {
                 "lat": 37.7855662,
                 "lng": -122.3969688
@@ -35,30 +20,29 @@ export class ContactService {
             "name": "Alex Jonathan",
             "company": "Twitter. inc.",
             "email":"alexj@gmail.com",
-            "title": "Marketing Manager",
-            "mobile": "(123)486-7090",
-            "photo": "https://img.freepik.com/free-photo/man-portrait_1296-636.jpg?w=740&t=st=1672451684~exp=1672452284~hmac=2a207fc4baa5e6491d133b938ef63cc4ea8bb10f17ff82331a02c9d77a656de9",
+            "skill": "Marketing Manager",
+            "phone": "(123)486-7090",
+            "img": "alex_jonathan.jpg",
             "location": {
                 "lat": 37.7855662,
                 "lng": -122.3969688
                },
             "address": '795 Folsom Ave, Suite 600',
-            "city": 'San Francisco, CA 94107'
+            "city": 'San Francisco, CA 94107',
     },  
     '1519720712928':{
             "id": "1519720712928",
             "name": "Michael Zimber",
             "company": "Twitter. inc.",
-            "email":"j_carthon@gmail.com",
-            "title": "Sales Manager",
-            "mobile": "(123)456-7890",
-            "photo": "https://img.freepik.com/free-photo/profile-young-confident-handsome-man_114579-78891.jpg?w=740&t=st=1672446228~exp=1672446828~hmac=64e4acc190b051fb5549c0d3a696b0705b2ef889fb3589bcbec70fce47343ce4",
+            "skill": "Sales Manager",
+            "phone": "(123)456-7890",
+            "img": "michael_zimber.jpg",
             "location": {
                 "lat": 37.7855662,
                 "lng": -122.3969688
                },
             "address": '795 Folsom Ave, Suite 600',
-            "city": 'San Francisco, CA 94107'
+            "city": 'San Francisco, CA 94107',
     },
         
     '1519720712929':{
@@ -66,9 +50,9 @@ export class ContactService {
             "name": "Monica Smith",
             "company": "Twitter. inc.",
             "email":"monismith@gmail.com",
-            "title": "Graphic Designer",
-            "mobile": "(123)426-7190",
-            "photo": "https://images.pexels.com/photos/7897404/pexels-photo-7897404.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+            "skill": "Graphic Designer",
+            "phone": "(123)426-7190",
+            "img": "monica_smith.jpg",
             "location": {
                 "lat": 37.7855662,
                 "lng": -122.3969688
@@ -80,9 +64,9 @@ export class ContactService {
             "name": "Sandra Smith",
             "company": "Twitter. inc.",
             "email":"sansmith@gmail.com",
-            "title": "Graphic Designer",
-            "mobile": "(123)456-1890",
-            "photo": "https://images.pexels.com/photos/4350178/pexels-photo-4350178.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+            "skill": "Graphic Designer",
+            "phone": "(123)456-1890",
+            "img": "sandra_smith.jpg",
             "location": {
                 "lat": 37.7855662,
                 "lng": -122.3969688
@@ -92,34 +76,19 @@ export class ContactService {
     },
     '1519720712931':{
             "id": "1519720712931",
-            "name": "Karl Smith",
+            "name": "John Smith",
             "company": "Twitter. inc.",
-            "email":"karlmith@gmail.com",
-            "title": "Graphic Designer",
-            "mobile": "(123)556-7890",
-            "photo": "https://images.pexels.com/photos/5384429/pexels-photo-5384429.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+            "email":"jsmith@gmail.com",
+            "skill": "Graphic Designer",
+            "phone": "(123)556-7890",
+            "img": "john_smith.jpg",
             "location": {
                 "lat": 37.7855662,
                 "lng": -122.3969688
                },
             "address": '795 Folsom Ave, Suite 600',
             "city": 'San Francisco, CA 94107' 
-        },
-        '1519720712932':{
-                "id": "1519720712932",
-                "name": "Gaia Smith",
-                "company": "Twitter. inc.",
-                "email":"gaia@gmail.com",
-                "title": "Graphic Designer",
-                "mobile": "(123)756-7890",
-                "photo": "https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-                "location": {
-                    "lat": 37.7855662,
-                    "lng": -122.3969688
-                   },
-                "address": '795 Folsom Ave, Suite 600',
-                "city": 'San Francisco, CA 94107'
-            }}
+        }}
     
     static convert_contact_db_to_array(contacts) {
         let cont = []
@@ -158,14 +127,14 @@ export class ContactService {
             return false ;
         }
 
-        if(contact.photo == "")
+        if(contact.img == "")
         {
-            alert("Photo field is required") ;
+            alert("img field is required") ;
             return false ;
         }
 
         const regex = /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g;
-        if (!regex.test(contact.mobile)) {
+        if (!regex.test(contact.phone)) {
             alert("Wrong phone no");
             return false
         }
