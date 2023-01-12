@@ -5,8 +5,8 @@
         <div class="row valign-wrapper">
           <div class="col s4 m5 center-align">
             <div class="inner">
-              <img v-if="contact.img" :src="'./img/'+contact.img" alt="name" class="circle responsive-img"><br>
-              <img v-if="!contact.img" src="../assets/alex_jonathan.jpg" alt="name" class="circle responsive-img"><br>
+              <img v-if="contact.img" :src="contact.img" alt="name" class="circle responsive-img"><br>
+              <img v-if="!contact.img" src="https://img.freepik.com/premium-vector/man-avatar-character-male-portrait-flat-design_532867-538.jpg?w=1060" alt="name" class="circle responsive-img"><br>
               <span class="skill grey-text text-darken-1">{{contact.skill}}</span>
             </div>
           </div>
@@ -22,6 +22,7 @@
               <p class="address">{{ contact.address }}</p>
               <p class="city">{{ contact.city }}</p>
               <p class="tel">P: {{ contact.phone }}</p>
+              <p class="email"> <a :href="'mailto:'+contact.email">{{ contact.email }}</a></p>
             </div>
           </div>
         </div>

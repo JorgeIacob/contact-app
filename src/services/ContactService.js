@@ -7,7 +7,7 @@ export class ContactService {
             "email":"j_carthon@gmail.com",
             "skill": "CEO",
             "phone": "(123)456-7790",
-            "img": "janeth_carton.jpg",      
+            "img": "https://orientemedio.news/wp-content/uploads/2023/01/janeth_carton.jpg",      
             "location": {
                 "lat": 37.7855662,
                 "lng": -122.3969688
@@ -22,7 +22,7 @@ export class ContactService {
             "email":"alexj@gmail.com",
             "skill": "Marketing Manager",
             "phone": "(123)486-7090",
-            "img": "alex_jonathan.jpg",
+            "img": "https://orientemedio.news/wp-content/uploads/2023/01/alex_jonathan.jpg",
             "location": {
                 "lat": 37.7855662,
                 "lng": -122.3969688
@@ -34,9 +34,10 @@ export class ContactService {
             "id": "1519720712928",
             "name": "Michael Zimber",
             "company": "Twitter. inc.",
+            "email":"MZimber@gmail.com",
             "skill": "Sales Manager",
             "phone": "(123)456-7890",
-            "img": "michael_zimber.jpg",
+            "img": "https://orientemedio.news/wp-content/uploads/2023/01/michael_zimber.jpg",
             "location": {
                 "lat": 37.7855662,
                 "lng": -122.3969688
@@ -52,7 +53,7 @@ export class ContactService {
             "email":"monismith@gmail.com",
             "skill": "Graphic Designer",
             "phone": "(123)426-7190",
-            "img": "monica_smith.jpg",
+            "img": "https://orientemedio.news/wp-content/uploads/2023/01/monica_smith.jpg",
             "location": {
                 "lat": 37.7855662,
                 "lng": -122.3969688
@@ -66,7 +67,7 @@ export class ContactService {
             "email":"sansmith@gmail.com",
             "skill": "Graphic Designer",
             "phone": "(123)456-1890",
-            "img": "sandra_smith.jpg",
+            "img": "https://orientemedio.news/wp-content/uploads/2023/01/sandra_smith.jpg",
             "location": {
                 "lat": 37.7855662,
                 "lng": -122.3969688
@@ -81,7 +82,7 @@ export class ContactService {
             "email":"jsmith@gmail.com",
             "skill": "Graphic Designer",
             "phone": "(123)556-7890",
-            "img": "john_smith.jpg",
+            "img": "https://orientemedio.news/wp-content/uploads/2023/01/john_smith.jpg",
             "location": {
                 "lat": 37.7855662,
                 "lng": -122.3969688
@@ -121,9 +122,32 @@ export class ContactService {
             return false ;
         }
 
-        if(contact.name == "")
+        if(contact.name == "" )
         {
             alert("Name field is required") ;
+            return false ;
+        }
+        
+        const regex_phone = /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g;
+        if (!regex_phone.test(contact.phone)) {
+            alert("Wrong phone no");
+            return false
+        }
+
+        const regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+        if (!regex_email.test(contact.email)) {
+            alert("Wrong email");
+            return false
+        }
+
+        if(contact.address == "" )
+        {
+            alert("Address field is required") ;
+            return false ;
+        }
+        if(contact.city == "" )
+        {
+            alert("City field is required") ;
             return false ;
         }
 
@@ -133,11 +157,7 @@ export class ContactService {
             return false ;
         }
 
-        const regex = /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g;
-        if (!regex.test(contact.phone)) {
-            alert("Wrong phone no");
-            return false
-        }
+        
         else return true
     }
 

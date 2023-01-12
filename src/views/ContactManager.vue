@@ -31,12 +31,11 @@
       :buttonText="buttonText"
       @update-contact="updateContact(contact_item)"
       @cancel-contact="cancelContact(contact_item)"
-      @validate-contact="validateContact(contact_item)"
       ></contact-form>
       </div>
      
       <!-- use the modal component, pass in the prop -->
-      <modal v-if="showModal" @close="showModal = false">
+      <modal v-if="showModal" @close="showModal = false" style="display:flex;alignItems:center;justifyContent:center;height: 60%;">
       </modal>
   
     </div>
@@ -59,15 +58,15 @@ export default {
         showModal: false,
         buttonText: "",
         contact_item: {
-                    name : 'Name',
+                    name : '',
                     img: 'https://img.freepik.com/premium-vector/man-avatar-character-male-portrait-flat-design_532867-538.jpg?w=1060',
-                    email : 'Email',
-                    phone : 'Phone',
-                    company : 'Company',
-                    skill : 'Profession',
+                    email : '',
+                    phone : '',
+                    company : '',
+                    skill : '',
                     id : '',
-                    address : 'Address',
-                    city : 'City',
+                    address : '',
+                    city : '',
                     location : {},
                 },
         errorMessage : null
@@ -94,31 +93,28 @@ export default {
             this.showModal = true ;
         },
         cancelContact(contact) {
-            alert("cancelContact:"+contact) ;
             this.showModal = false ;
         },
         updateContact : function(contact)
         {
-            alert("updateContact:"+contact)
+          this.updateSubmit(contact)
         },
         addcontact: function()
         {
-            let d = new Date() ;
+            this.buttonText = "Add Contact" ;
             this.contact_item = {
-                    name : 'Name',
-                    img: 'https://img.freepik.com/premium-vector/man-avatar-character-male-portrait-flat-design_532867-538.jpg?w=1060',
-                    email : 'Email',
-                    phone : 'Phone',
-                    company : 'Company',
-                    skill : 'Profession',
+                    name : '',
+                    img: 'https://img.freepik.com/premium-vector/man-avatar-character-male-portrait-flat-design_532867-538.jpg?w=125',
+                    email : '',
+                    phone : '',
+                    company : '',
+                    skill : '',
                     id : Date.now(),
-                    address : 'Address',
-                    city : 'City',
+                    address : '',
+                    city : '',
                     location : {},
                 }
                 this.showModal = true ;
-
-                alert(this.contact_item.id) ;
         },
         deleteContact : function(contact)
             {
@@ -137,7 +133,8 @@ export default {
                 {
                     if( await ContactService.createContact(contact) == true )
                     {
-                        return this.$router.push('/') ;
+                      this.updateLocal()
+                      this.showModal = false ;
                     }
                 }
                 catch(error)
@@ -145,14 +142,6 @@ export default {
                     console.log(error)
                 }
             },
-        validateContact : function(contact){
-        const regex = /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g;
-        if (!regex.test(contact.phone)) {
-            alert("Wrong phone no");
-            return false
-        }
-        else return true
-    },
         }
     }
 
@@ -164,10 +153,12 @@ body {
 }
 .modal {
   padding: 15px;
+  width: 100%;
+  height: 20%;
 }
 .contact {
   position: relative;
-  height: 230px;
+  height: 300px;
   &.adding {
     display: table;
     width: 100%;
