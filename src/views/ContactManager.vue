@@ -153,8 +153,6 @@ body {
 }
 .modal {
   padding: 15px;
-  width: 100%;
-  height: 20%;
 }
 .contact {
   position: relative;

@@ -85,39 +85,96 @@
   </script>
   
   <style>
+.btn{
+  margin:-5px 7px 0px 1px;
+ }
  .edit-img
   {
     margin-top: -10px;
   }
 .modal-mask {
-  height:300px;
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  display: table;
+  display: block;
   transition: opacity 0.3s ease;
 }
 
 .modal-wrapper {
-  bottom:0;
-    position:fixed;
-    overflow-y:auto;
-    overflow-x:hidden;
-  z-index: 9998;
-  top: 0;
-  left: 0;
   display: table-cell;
   vertical-align: middle;
 }
 
 .modal-container {
-  
   width: 90%;
-  margin: 0px auto;
-  padding: 20px 20px;
+  height:100%;
+  margin: 5px auto;
+  padding: 20px 30px;
   background-color: #fff;
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
   font-family: Helvetica, Arial, sans-serif;
+}
+@media screen and (max-width: 992px) {
+form{
+overflow-y: scroll;
+height: 1152px;
+}
+.btn{
+  margin:3px;
+}
+}
+
+
+@media screen and (max-width: 769px) {
+form{
+  overflow-y: scroll;
+  height: 928px;
+}
+.btn{
+  margin:3px;
+}
+}
+@media screen and (max-width: 660px) {
+form{
+  overflow-y: scroll;
+  height: 820px;
+}
+
+.btn{
+  margin:3px;
+}
+}
+@media screen and (max-width: 560px) {
+form{
+overflow-y: scroll;
+height: 720px;
+}
+}
+@media screen and (max-width: 480px) {
+form{
+overflow-y: scroll;
+height: 640px;
+}
+.btn{
+  margin:3px;
+}
+}
+
+@media screen and (max-height: 480px) {
+form{
+overflow-y: scroll;
+height: 350px;
+}
+.btn{
+  margin:3px;
+}
 }
 
 .modal-header h3 {
@@ -151,7 +208,5 @@
   -webkit-transform: scale(5.1);
   transform: scale(1.1);
 }
-.btn{
-  margin:2px;
-}
+
 </style>
