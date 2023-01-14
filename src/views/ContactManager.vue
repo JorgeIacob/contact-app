@@ -6,7 +6,6 @@
         <div class="row">
           <Contact
            v-for="contact in contacts" 
-           :key="contact.id" 
            :contact="contact"
            @delete-contact="deleteContact(contact)" 
            @edit-contact="editContact(contact)"

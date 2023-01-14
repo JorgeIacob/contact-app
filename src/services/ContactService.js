@@ -90,16 +90,6 @@ export class ContactService {
             "address": '795 Folsom Ave, Suite 600',
             "city": 'San Francisco, CA 94107' 
         }}
-    
-    static convert_contact_db_to_array(contacts) {
-        let cont = []
-        
-        for (let id in contacts) {
-            cont[cont.length] = contacts[id] ;
-        }
-
-        return cont ;
-        }
 
     static getAllContacts (){
         let contacts = window.localStorage.getItem('contactsDB') ;
@@ -111,7 +101,7 @@ export class ContactService {
             window.localStorage.setItem('contactsDB', JSON.stringify(this.contacts))
           }
           
-        return this.convert_contact_db_to_array(this.contacts)
+        return this.contacts
     }
 
     static validateContact(contact) 
@@ -181,7 +171,7 @@ export class ContactService {
         {
             delete this.contacts[contactId]
             window.localStorage.setItem('contactsDB', JSON.stringify(this.contacts))
-            return this.convert_contact_db_to_array(this.contacts) ;
+            return this.contacts ;
         } 
     } 
 
