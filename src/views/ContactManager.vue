@@ -4,13 +4,14 @@
         
       <div class="col s12 l6 xl10">
         <div class="row">
-          <contact
-           @delete-contact="deleteContact(contact)" 
+          <Contact
            v-for="contact in contacts" 
            :key="contact.id" 
            :contact="contact"
-           @edit-contact="editContact(contact)">
-          </contact>
+           @delete-contact="deleteContact(contact)" 
+           @edit-contact="editContact(contact)"
+           >
+          </Contact>
         </div>
       </div>
   
